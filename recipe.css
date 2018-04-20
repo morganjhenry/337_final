@@ -1,0 +1,228 @@
+@charset "UTF-8";
+.header
+{
+	background: url("./images/header.jpg");
+	background-position: center; 
+	background-size: cover;
+    color: white;
+    text-align: center;
+    padding: 80px;
+    font-family: Courier;
+    font-size: 50px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+body
+{
+	background: linear-gradient(to bottom, #664321 0%, #6F91B2 100%);
+	height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.buttons
+{
+	background: #214466;
+	height: 50px;
+}
+
+button
+{
+	background: none;
+	height: 50px;
+	font-family: Courier;
+	color: white;
+	font-size: 20px;
+	margin-right: 2px;
+}
+
+.right
+{
+	float: right;
+}
+
+.featured
+{
+	background: url("./images/wood.jpg");
+	height: 393px;
+	width: 585px;
+	background-size: contain;
+	margin-top: 1px;
+	font-family: Courier;
+    font-size: 50px;
+    float: left;
+}
+
+.recipe
+{
+	font-family: Courier;
+    font-size: 50px;
+    text-align: center;
+    height: 395px;
+}
+
+h3
+{
+	font-family: Courier;
+    color: white;
+    font-size: 30px;
+    margin-left: 20px;
+}
+
+.login
+{
+	background: url("./images/mealPrep.jpg");
+	background-repeat: no-repeat;
+	height: 396px;
+	width: 655px;
+	background-size: contain;
+	margin-top: 1px;
+	font-family: Courier;
+    font-size: 50px;
+    float: left;
+}
+
+.footer
+{
+	width: 100%;
+	background: #214466;
+	margin-top: 0;
+	height: 50px;
+}
+
+input
+{
+	font-family: Courier;
+    font-size: 40px;
+}
+
+.user
+{
+	margin-left: 30px;
+}
+
+.submit
+{
+	background: #214466;
+	height: 50px;
+	font-family: Courier;
+	color: white;
+	font-size: 20px;
+	margin-right: 2px;
+}
+
+.ingredients
+{
+	background: url("./images/ingredients.jpg");
+	background-repeat: no-repeat;
+	height: 393px;
+	width: 655px;
+	background-size: contain;
+	margin-top: 1px;
+	font-family: Courier;
+    font-size: 50px;
+    float: left;
+}
+
+table
+{
+	font-family: Courier;
+    font-size: 20px;
+    border: solid;
+    margin: auto;
+}
+
+th
+{
+	border: 1px solid black;
+}
+
+td
+{
+	border: 1px solid black;
+}
+
+.ing
+{
+	font-family: Courier;
+    font-size: 15px;
+}
+
+.addIngredient
+{
+	float: left;
+	height: 45px;
+	width: 50px;
+	margin-top:10px;
+	margin-left: 13px;
+	
+}
+
+.addRecipe
+{
+	float: right;
+	margin-top: 10px;
+	margin-right: 15px;
+}
+
+.newIng
+{
+	font-size: 20px;
+}
+
+.ingBox
+{
+	font-size: 20px;
+	margin-bottom: 5px;
+}
+
+.recipeTitle
+{
+	font-size: 40px;
+}
+
+.recipeImage
+{
+	float: right;
+	margin-right: 20px;
+}
+
+.recipeInfo
+{
+	float: left;
+	margin-left: 20px;
+	font-size: 20px;
+}
+
+li
+{
+	float: left;
+}
+
+.recipeDes
+{
+	float: left;
+	width: 350px;
+}
+
+.recipePic
+{
+	background: url("./images/recipe.jpg");
+	width: 525px;
+	height: 790px;
+	background-size: contain;
+	margin-top: 1px;
+	font-family: Courier;
+    font-size: 50px;
+    float: left;
+}
+
+.multipleRecipe
+{
+	font-family: Courier;
+    font-size: 50px;
+    text-align: center;
+    height: 790px;
+}
