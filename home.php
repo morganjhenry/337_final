@@ -52,9 +52,7 @@ function ingredients()
 function getIngredients()
 {
 	console.log("in get function");
-	var str= '<table><tr><th>Name</th><th>Cost</th><th>Quantity</th><th>Description</th><th>Add</th></tr>';
-		//<tr><td>Egg</td><td>$.25</td><td>1 egg</td><td>This is an egg.Here is some egg info.</td><td><input class="ing" size="2" maxInput="2"></td></tr>
-		//<tr><td>Milk</td><td>$2.00</td><td>1 Gallon</td> <td>This is milk.</td></tr></table>';
+	var str= '<table><tr><th>Name</th><th>Cost</th><th>Unit</th><th>Description</th><th>Add</th></tr>';
 	var qdiv = document.getElementById("IngTable");
 	var ajax = new XMLHttpRequest();
 	ajax.open("GET","controller.php?call=ingredients", true); 
@@ -78,7 +76,8 @@ function getIngredients()
 				else
 					notes = arr[i]['notes'];
 					
-				str+= '<tr><td>' + arr[i]['name'] + '</td><td>$' + arr[i]['cost'] +'</td><td>'+ unit +'</td><td>'+notes+'</td><td><input id="addIng"' + arr[i]['id'] +'class="ing" size="2" maxInput="2"></td></tr>'
+				str+= '<tr><td>' + arr[i]['name'] + '</td><td>$' + arr[i]['cost'] +'</td><td>'+ unit +'</td><td>'+notes+
+					  '</td><td><input type="numer" id="addIng"' + arr[i]['id'] +'class="ing" size="2" maxInput="2"></td></tr>'
 			}
 			str += "</table>";
 		 	qdiv.innerHTML = str;

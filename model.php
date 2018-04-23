@@ -28,7 +28,7 @@ class DatabaseAdaptor {
 	{
 		//$hashed_pwd = password_hash($pw, PASSWORD_DEFAULT);
 
-		$stmt = $this->DB->prepare("select hash from users where username='" . $un . "'");
+		$stmt = $this->DB->prepare("select pw_hash from users where username='" . $un . "'");
 		$stmt->execute();
 		$hash = $stmt->fetchAll ( PDO::FETCH_ASSOC );
 		if($hash != NULL)
