@@ -45,14 +45,14 @@ function ingredients()
 	var str = "";
 	str += '<div class="ingredients"></div><div class="recipe">Ingredients<button class = "addIngredient" onclick="newIngredient()">+</button><br>';
 	str += '<div id="IngTable"></div>';
-	str += '<br><button onclick="addIngredients()">Add Ingredients to List</button></div>';
+	str += '<br><button onclick="addIngredients()" class="addIng">Add Ingredients to List</button></div>';
 	display.innerHTML = str;
 	getIngredients();
 }
 function getIngredients()
 {
 	console.log("in get function");
-	var str= '<table><tr><th>Name</th><th>Cost</th><th>Unit</th><th>Description</th><th>Add</th></tr>';
+	var str= '<table class = "ingredientTable"><tr><th>Name</th><th>Cost</th><th>Unit</th><th>Description</th><th>Add</th></tr>';
 	var qdiv = document.getElementById("IngTable");
 	var ajax = new XMLHttpRequest();
 	ajax.open("GET","controller.php?call=ingredients", true); 

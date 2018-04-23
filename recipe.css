@@ -88,8 +88,11 @@ h3
 {
 	width: 100%;
 	background: #214466;
-	margin-top: 0;
 	height: 50px;
+	position: fixed; 
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 input
@@ -225,4 +228,16 @@ li
     font-size: 50px;
     text-align: center;
     height: 790px;
+}
+
+.ingredientTable
+{
+	width: 750px;
+	margin-bottom: 0px;
+}
+
+.addIng
+{
+	margin-bottom: 70px;
+	margin-top: 0px;
 }
