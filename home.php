@@ -77,7 +77,7 @@ function getIngredients()
 					notes = arr[i]['notes'];
 					
 				str+= '<tr><td>' + arr[i]['name'] + '</td><td>$' + arr[i]['cost'] +'</td><td>'+ unit +'</td><td>'+notes+
-					  '</td><td><input type="numer" id="addIng"' + arr[i]['id'] +'class="ing" size="2" maxInput="2"></td></tr>'
+					  '</td><td><input type="number" min=0 max=10 id="addIng"' + arr[i]['id'] +'class="ing"></td></tr>'
 			}
 			str += "</table>";
 		 	qdiv.innerHTML = str;
