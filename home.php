@@ -66,8 +66,19 @@ function getIngredients()
 			var arr = JSON.parse(ajax.responseText);
 			for(i = 0; i < arr.length; i++)
 			{
+				var unit = "";
+				var notes = "";
+				if(arr[i]['unit'] == null)
+					unit = "N/A";
+				else
+					unit = arr[i]['unit'];
 
-				str+= '<tr><td>' + arr[i]['name'] + '</td><td>$' + arr[i]['cost'] +'</td><td>'+ arr[i]['unit'] +'</td><td>'+arr[i]['notes']+'</td><td><input id="addIng"' + arr[i]['id'] +'class="ing" size="2" maxInput="2"></td></tr>'
+				if(arr[i]['notes'] == null)
+					notes = "N/A";
+				else
+					notes = arr[i]['notes'];
+					
+				str+= '<tr><td>' + arr[i]['name'] + '</td><td>$' + arr[i]['cost'] +'</td><td>'+ unit +'</td><td>'+notes+'</td><td><input id="addIng"' + arr[i]['id'] +'class="ing" size="2" maxInput="2"></td></tr>'
 			}
 			str += "</table>";
 		 	qdiv.innerHTML = str;
