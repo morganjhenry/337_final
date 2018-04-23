@@ -1,5 +1,6 @@
 <?php
-//get ingredients
+include "model.php";
+
 $call = "";
 if(isset($_GET['call']))
 {
@@ -9,7 +10,16 @@ if(isset($_GET['call']))
 //get ingredients
 if($call == 'ingredients')
 {
-    echo 'hi';
+	$arr = $theDBA -> getIngredients();
+	
+	$str = "";
+	foreach ($arr as $val)
+	{
+		$str .= $val['id'] . " " . $val['name'] . "<br>";
+	}
+	
+	echo$str;
+
 }
 
 //get recipes
