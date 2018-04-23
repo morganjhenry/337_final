@@ -12,13 +12,7 @@ if($call == 'ingredients')
 {
 	$arr = $theDBA -> getIngredients();
 	
-	$str = "";
-	foreach ($arr as $val)
-	{
-		$str .= $val['id'] . " " . $val['name'] . "<br>";
-	}
-	
-	echo$str;
+	echo json_encode($arr);
 
 }
 
