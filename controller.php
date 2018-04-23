@@ -16,6 +16,13 @@ if($call == 'ingredients')
 
 }
 
+if($call == 'addToShoppingList')
+{
+	echo "IN CONT";
+	echo $_GET['addArr'];
+	//$theDBA -> addToShoppingList($_GET['addArr']);
+}
+
 //get recipes
 if($call == 'recipes')
 {

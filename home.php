@@ -24,6 +24,7 @@ session_start ();
 <div id="display"></div>
 <div class="footer"></div>
 <script>
+ingIDs = [];
 function featured()
 {
 	var display = document.getElementById("display");
@@ -51,12 +52,12 @@ function ingredients()
 }
 function getIngredients()
 {
-	console.log("in get function");
 	var str= '<table><tr><th>Name</th><th>Cost</th><th>Unit</th><th>Description</th><th>Add</th></tr>';
 	var qdiv = document.getElementById("IngTable");
 	var ajax = new XMLHttpRequest();
 	ajax.open("GET","controller.php?call=ingredients", true); 
 	ajax.send();
+	ingIDs = [];
 	ajax.onreadystatechange = function() 
 	{
 		if (ajax.readyState == 4 && ajax.status == 200) 
@@ -64,6 +65,7 @@ function getIngredients()
 			var arr = JSON.parse(ajax.responseText);
 			for(i = 0; i < arr.length; i++)
 			{
+				ingIDs.push(arr[i]['id']);
 				var unit = "";
 				var notes = "";
 				if(arr[i]['unit'] == null)
@@ -86,7 +88,27 @@ function getIngredients()
 }
 function addIngredients()
 {
-	alert("add ing");
+	var addArray = [];
+	for(i = 0; i < ingIDs.length; i++)
+	{
+		var cur = document.getElementById("addIng_" + ingIDs[i]);
+		if(cur.value > 0)
+			addArray[ingIDs[i]] = cur.value;
+	}
+
+
+	var ajax = new XMLHttpRequest();
+	ajax.open("GET","controller.php?call=addToShoppingList&addArr=" + addArray, true); 
+	ajax.send();
+	ingIDs = [];
+	ajax.onreadystatechange = function() 
+	{
+		if (ajax.readyState == 4 && ajax.status == 200) 
+		{
+			console.log("completed adding to shopping list");
+		}
+	} 
+
 	
 }
 function newIngredient()
