@@ -43,7 +43,7 @@ class DatabaseAdaptor {
 	}
 	
 	
-	public function register($un, $pw)
+	public function register($un, $pw, $first, $last)
 	{
 		$hashed_pwd = password_hash($pw, PASSWORD_DEFAULT);
 		$stmt = $this->DB->prepare("select * from users where username='" . $un . "'");
@@ -55,8 +55,8 @@ class DatabaseAdaptor {
 		}
 		else 
 		{
-			$stmt = $this->DB->prepare("insert into users (username, hash)" .
-					"values ('" . $un . "' , '" . $hashed_pwd . "' )");
+			$stmt = $this->DB->prepare("insert into users (username, pw_hash, f_name, l_name)" .
+			    "values ('" . $un . "' , '" . $hashed_pwd . "','".$first."','".$last."' )");
 			$stmt->execute();
 			return true;
 		}

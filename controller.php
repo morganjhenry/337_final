@@ -1,5 +1,6 @@
 <?php
 include "model.php";
+session_start ();
 
 $call = "";
 if(isset($_GET['call']))
@@ -37,7 +38,19 @@ else if(isset($_POST['ID'])  && isset($_POST['password']))
 //register
 else if(isset($_POST['regID'])  && isset($_POST['regPassword']) && isset($_POST['firstName']) && isset($_POST['lastName']))
 {
+    $userId = $_POST['regID'];
+    $password = $_POST['regPassword'];
+    $first = $_POST['firstName'];
+    $last = $_POST['lastName'];
     
+    unset($_POST['regID']);
+    unset($_POST['regPassword']);
+    
+    $valid = $theDBA->register($userId, $password, $first, $last);
+    if($valid === true)
+    {
+        header('Location: home.php');
+    }
 }
 
 //add ingredient
