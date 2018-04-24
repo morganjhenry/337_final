@@ -62,6 +62,7 @@ else if(isset($_POST['regID'])  && isset($_POST['regPassword']) && isset($_POST[
     
     unset($_POST['regID']);
     unset($_POST['regPassword']);
+    unset($_POST['firstName']);
     
     $valid = $theDBA->register($userId, $password, $first, $last);
     if($valid === true)
@@ -74,7 +75,22 @@ else if(isset($_POST['regID'])  && isset($_POST['regPassword']) && isset($_POST[
 //add ingredient
 else if(isset($_POST['ingName'])  && isset($_POST['ingCost']) && isset($_POST['ingUnit']) && isset($_POST['ingDescription']))
 {
+    $name = $_POST['ingName'];
+    $cost = $_POST['ingCost'];
+    $unit = $_POST['ingUnit'];
+    $description = $_POST['ingDescription'];
     
+    unset($_POST['ingName']);
+    unset($_POST['ingCost']);
+    unset($_POST['ingUnit']);
+    unset($_POST['ingDescription']);
+    
+    $valid = $theDBA->addIng($name, $cost, $unit, $description);
+    if($valid === true)
+    {
+        $_SESSION['goTo'] = 'ing';
+        header('Location: home.php');
+    }
 }
 
 //add recipe

@@ -4,10 +4,20 @@
 <title>Recipes</title>
 <link rel="stylesheet" href="recipe.css">
 </head>
-<body onload="featured()">
+
 
 <?php
 session_start ();
+if(isset($_SESSION['goTo']) && $_SESSION['goTo']==='ing')
+{
+    echo "<body onload='ingredients()'>";
+    unset($_SESSION['goTo']);
+}
+
+else 
+{
+    echo '<body onload="featured()">';
+}
 ?>
 
 <h1 class="header">EZ Menus</h1>
