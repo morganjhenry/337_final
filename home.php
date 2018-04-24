@@ -16,8 +16,19 @@ session_start ();
 <button onclick="ingredients()">Ingredients</button>
 <button onclick="recipes()">Recipes</button>
 <!--  <button>Weekly Plan</button>-->
-<button onclick="shoppingList()">Shopping List</button>
-<button class="right" onclick="login()">Login</button>
+<?php 
+if(isset($_SESSION['user']))
+{
+    echo '<button onclick="shoppingList()">Shopping List</button>';
+    echo '<button class="right" onclick="logout()">Logout</button>';
+}
+
+else 
+{
+   echo '<button class="right" onclick="login()">Login</button>';
+}
+?>
+
 <button class="right" onclick="register()">Register</button>
 </div>
 
@@ -44,12 +55,27 @@ function ingredients()
 {
 	var display = document.getElementById("display");
 	var str = "";
-	str += '<div class="ingredients"></div><div class="recipe">Ingredients<button class = "addIngredient" onclick="newIngredient()">+</button><br>';
+	str += '<div class="ingredients"></div><div class="recipe">Ingredients';
+	<?php 
+	if(isset($_SESSION['user']))
+	{
+	    echo 'str += "<button class = \'addIngredient\' onclick=\'newIngredient()\'>+</button><br>"';
+	    
+	}
+	?>
+	
 	str += '<div id="IngTable"></div>';
-	str += '<br><button onclick="addIngredients()" class="addIng">Add Ingredients to List</button></div>';
+	<?php
+	if(isset($_SESSION['user']))
+	{
+	    echo "str += '<br><button onclick=\"addIngredients()\" class=\"addIng\">Add Ingredients to List</button></div>'";
+	}
+	?>
+
 	display.innerHTML = str;
 	getIngredients();
 }
+
 function getIngredients()
 {
 	var str= '<table class = "ingredientTable"><tr><th>Name</th><th>Cost</th><th>Unit</th><th>Description</th><th>Add</th></tr>';
@@ -125,9 +151,19 @@ function recipes()
 	var display = document.getElementById("display");
 	var str = "";
 	str += '<div class="recipePic"></div><div class="multipleRecipe">Recipes';
-	str += '<button class = "addRecipe" onclick="addRecipe()">Add a Recipe</button>';
-	str += getRecipes();
-	str += '<button onclick="addRecipeToList()">Add to List</button</div>';
+	<?php
+	if(isset($_SESSION['user']))
+	{
+	    echo 'str += "<button class = \'addRecipe\' onclick=\'addRecipe()\'>Add a Recipe</button>";';
+	}
+	?>
+	str += '<div id="recipeList"></div>';
+	<?php
+    if(isset($_SESSION['user']))
+	{
+	   echo "str += '<button onclick=\"addRecipeToList()\">Add to List</button</div>';";
+	}
+	?>
 	display.innerHTML = str;
 }
 function addRecipe()
@@ -141,6 +177,7 @@ function addRecipe()
 }
 function getRecipes()
 {
+	var recipeList = document.getElementById("recipeList");
 	var str = "";
 	str+='<div class="recipeTitle">PB&J Pancakes </div>';
 	str+='<img class="recipeImage"src="./images/pancakes.jpeg" alt="Recipe Pic" width="300">';
@@ -162,7 +199,7 @@ function getRecipes()
 			printQuotes(array);
 		}
 	}  */
-	return str;
+	recipeList.innerHTML = str;
 }
 function shoppingList()
 {
@@ -172,6 +209,11 @@ function shoppingList()
 function addRecipeToList()
 {
 	alert();
+}
+
+function logout()
+{
+	document.location.href = "./controller.php";
 }
 </script>
 

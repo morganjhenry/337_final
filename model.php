@@ -34,7 +34,7 @@ class DatabaseAdaptor {
 		if($hash != NULL)
 		{
 
-			return password_verify($pw, $hash[0]['hash']);
+			return password_verify($pw, $hash[0]['pw_hash']);
 		}
 		else 
 		{

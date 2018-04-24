@@ -17,7 +17,7 @@ if($call == 'ingredients')
 
 }
 
-if($call == 'addToShoppingList')
+else if($call == 'addToShoppingList')
 {
 	echo "IN CONT";
 	echo $_GET['addArr'];
@@ -25,7 +25,7 @@ if($call == 'addToShoppingList')
 }
 
 //get recipes
-if($call == 'recipes')
+else if($call == 'recipes')
 {
     echo 'bye';
 }
@@ -33,6 +33,23 @@ if($call == 'recipes')
 //login
 else if(isset($_POST['ID'])  && isset($_POST['password']))
 {
+    $userId = $_POST['ID'];
+    $password = $_POST['password'];
+    
+    unset($_POST['ID']);
+    unset($_POST['password']);
+    
+    $valid = $theDBA->verifyCredentials($userId, $password);
+    if($valid === true)
+    {
+        $_SESSION['user'] = $userId;
+        header('Location: home.php');
+    }
+    
+    else 
+    {
+        header('Location: home.php');
+    }
 }
 
 //register
@@ -51,6 +68,7 @@ else if(isset($_POST['regID'])  && isset($_POST['regPassword']) && isset($_POST[
     {
         header('Location: home.php');
     }
+    
 }
 
 //add ingredient
@@ -63,4 +81,10 @@ else if(isset($_POST['ingName'])  && isset($_POST['ingCost']) && isset($_POST['i
 else if(isset($_POST['recName'])  && isset($_POST['recIng']) &&  isset($_POST['recDescription']))
 {
 
+}
+
+else 
+{
+    unset( $_SESSION['user']);
+    header('Location: home.php');
 }
