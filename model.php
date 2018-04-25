@@ -72,6 +72,25 @@ class DatabaseAdaptor {
 	    return true;
 	}
 	
+	public function getShoppingList($username)
+	{
+		$getUserID = "select id from users where username='" . $username . "'";
+		$stmt = $this->DB->prepare($getUserID);
+		$stmt->execute();
+		$userID= $stmt->fetchAll ( PDO::FETCH_ASSOC );
+		$userID = $userID[0]['id'];
+		
+		$getList = "select ingredient.name, ingredient.cost, ingredient.unit, ingredient.notes  from ( " .
+				"(shopping_list join ingredient on (shopping_list.ing_id=ingredient.id)) " .
+				" join users on (shopping_list.user_id = users.id) " .
+				") where users.id=" . $userID;
+		
+		$stmt = $this->DB->prepare($getList);
+		$stmt->execute ();
+		return $stmt->fetchAll ( PDO::FETCH_ASSOC );
+	}
+		
+	
 	public function addToShoppingList($igID, $qty, $username)
 	{
 		$getUserID = "select id from users where username='" . $username . "'";
@@ -114,6 +133,9 @@ $theDBA = new DatabaseAdaptor ();
 //$arr=array( 1=>2);
 //$theDBA -> addToShoppingList($arr, 'mjh');
 // $arr = $theDBA->getMoviesByRank (6);
+
+//$arr = $theDBA->getShoppingList('test');
+//print_r($arr);
 
 /*
 $arr = $theDBA -> getIngredients();

@@ -12,7 +12,13 @@ if(isset($_GET['call']))
 if($call == 'ingredients')
 {
 	$arr = $theDBA -> getIngredients();
-	
+	echo json_encode($arr);
+
+}
+
+else if($call == 'getShoppingList')
+{
+	$arr = $theDBA -> getShoppingList($_SESSION['user']);
 	echo json_encode($arr);
 
 }
@@ -26,7 +32,6 @@ else if($call == 'addToShoppingList')
 	for($i = 0; $i < count($igID); $i++)
 	{
 		$str .= $theDBA -> addToShoppingList($igID[$i], $qty[$i], $_SESSION['user']) + "   ";
-		echo $str;
 	}
 }
 
