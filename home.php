@@ -97,7 +97,22 @@ function login()
 function register()
 {
 	var display = document.getElementById("display");
-	display.innerHTML ='<div class="login"></div><div class="recipe">Register<form action="controller.php" method="POST">First Name: <input type="text" maxlength="13" size="13" name="firstName" class="user" required> <br>Last Name: <input type="text" maxlength="13" size="13" name="lastName" class="user" required> <br>User ID: <input type="text" maxlength="13" size="13" name="regID" class="user" required> <br>Password: <input  maxlength="13" size="13" type="password" name="regPassword" required> <br><input type="submit" class="submit" name="Register" value="Register" class="submit"> <br> <br></form></div>';
+	var str = '<div class="login"></div><div class="recipe">';
+	str += 'Register';
+	<?php 
+	if(isset($_SESSION['error']) && $_SESSION['error']=='registerError')
+	{
+		echo "str+= '<div class=\'error\'>Username is already taken. Please try again</div>';";
+	   unset($_SESSION['error']);
+    }
+	?>
+	str += '<form action="controller.php" method="POST">';
+	str += 'First Name: <input type="text" maxlength="13" size="13" name="firstName" class="user" required><br>';
+	str += 'Last Name: <input type="text" maxlength="13" size="13" name="lastName" class="user" required> <br>';
+	str += 'User ID: <input type="text" maxlength="13" size="13" name="regID" class="user" required> <br>';
+	str += 'Password: <input  maxlength="13" size="13" type="password" name="regPassword" required><br>';
+	str += '<input type="submit" class="submit" name="Register" value="Register" class="submit"> <br> <br></form></div>';
+	display.innerHTML = str;
 }
 function ingredients()
 {
