@@ -124,23 +124,32 @@ function getIngredients()
 }
 function addIngredients()
 {
-	var addArray = [];
+	addIDs = [];
+	addQty = [];
 	for(i = 0; i < ingIDs.length; i++)
 	{
 		var cur = document.getElementById("addIng_" + ingIDs[i]);
 		if(cur.value > 0)
-			addArray[ingIDs[i]] = cur.value;
+		{	
+			console.log(cur.value);
+			addIDs.push(ingIDs[i]);
+			addQty.push(cur.value);
+			cur.value = 0;
+		}
 	}
-
-
+	
+	
 	var ajax = new XMLHttpRequest();
-	ajax.open("GET","controller.php?call=addToShoppingList&addArr=" + addArray, true); 
+	ajax.open("GET","controller.php?call=addToShoppingList&add_ig=" + 
+				JSON.stringify(addIDs) + "&add_qty=" + JSON.stringify(addQty), true); 
 	ajax.send();
 	ingIDs = [];
 	ajax.onreadystatechange = function() 
 	{
 		if (ajax.readyState == 4 && ajax.status == 200) 
 		{
+			var str = (ajax.responseText);
+			console.log("reponse: " + str);
 			console.log("completed adding to shopping list");
 		}
 	} 

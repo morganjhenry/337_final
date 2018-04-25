@@ -1,4 +1,5 @@
 <?php
+
 // Author: Rick Mercer , Morgan Henry
 class DatabaseAdaptor {
 	// The instance variable used in every one of the functions in class DatbaseAdaptor
@@ -71,6 +72,36 @@ class DatabaseAdaptor {
 	    return true;
 	}
 	
+	public function addToShoppingList($igID, $qty, $username)
+	{
+		$getUserID = "select id from users where username='" . $username . "'";
+		$stmt = $this->DB->prepare($getUserID);
+		$stmt->execute();
+		$userID= $stmt->fetchAll ( PDO::FETCH_ASSOC );
+		$userID = $userID[0]['id'];
+
+		$check = "select * from shopping_list where user_id='" . $userID . "' and ing_id='" . $igID . "'";
+		$stmt = $this->DB->prepare($check);
+		$stmt->execute();
+		$record= $stmt->fetchAll ( PDO::FETCH_ASSOC );
+
+		if($record != null)
+		{
+			$updateQty = "update shopping_list set qty=qty+" . $qty . " where user_id=" . $userID . " and ing_id=" . $igID;
+			$stmt = $this->DB->prepare($updateQty);
+			$stmt -> execute();
+			echo $updateQty;
+		}
+		else
+		{
+			$addToList = ("insert into shopping_list (user_id, ing_id, qty) "	 .
+						  "values ( " . $userID . " , " . $igID. " , " . $qty . ")");
+			$stmt = $this->DB->prepare($addToList);
+			$stmt->execute();	
+			echo $addToList;
+		}
+	}
+
 	
 } // End class DatabaseAdaptor
 $theDBA = new DatabaseAdaptor ();
@@ -80,7 +111,8 @@ $theDBA = new DatabaseAdaptor ();
 //$theDBA -> changeRating(1, 1);
 //$theDBA -> unflagAll();
 //print_r($arr);
-
+//$arr=array( 1=>2);
+//$theDBA -> addToShoppingList($arr, 'mjh');
 // $arr = $theDBA->getMoviesByRank (6);
 
 /*

@@ -19,9 +19,15 @@ if($call == 'ingredients')
 
 else if($call == 'addToShoppingList')
 {
-	echo "IN CONT";
-	echo $_GET['addArr'];
-	//$theDBA -> addToShoppingList($_GET['addArr']);
+	$igID = json_decode($_GET['add_ig']);
+	$qty = json_decode($_GET['add_qty']	);
+	$str = "";
+	
+	for($i = 0; $i < count($igID); $i++)
+	{
+		$str .= $theDBA -> addToShoppingList($igID[$i], $qty[$i], $_SESSION['user']) + "   ";
+		echo $str;
+	}
 }
 
 //get recipes
