@@ -14,6 +14,18 @@ if(isset($_SESSION['goTo']) && $_SESSION['goTo']==='ing')
     unset($_SESSION['goTo']);
 }
 
+if(isset($_SESSION['goTo']) && $_SESSION['goTo']==='register')
+{
+    echo "<body onload='register()'>";
+    unset($_SESSION['goTo']);
+}
+
+if(isset($_SESSION['goTo']) && $_SESSION['goTo']==='login')
+{
+    echo "<body onload='login()'>";
+    unset($_SESSION['goTo']);
+}
+
 else 
 {
     echo '<body onload="featured()">';
@@ -67,7 +79,20 @@ function featured()
 function login()
 {
 	var display = document.getElementById("display");
-	display.innerHTML ='<div class="login"></div><div class="recipe"><br>Login<form action="controller.php" method="POST">User ID: <input type="text" maxlength="13" size="13" name="ID" class="user" required> <br>Password: <input  maxlength="13" size="13" type="password" name="password" required> <br><input type="submit" class="submit" name="Login" value="Login" class="submit"> <br> <br></form></div>';
+	var str = '<div class="login"></div><div class="recipe"><br>';
+	str += 'Login<br>';
+	<?php 
+	if(isset($_SESSION['error']) && $_SESSION['error']=='loginError')
+	{
+	   echo "str+= '<div class=\'error\'>Username and password not recognized. Please try again</div>';";
+	   unset($_SESSION['error']);
+	}
+	?>
+	str+= '<form action="controller.php" method="POST">';
+	str += 'User ID: <input type="text" maxlength="13" size="13" name="ID" class="user" required>';
+	str += '<br>Password: <input  maxlength="13" size="13" type="password" name="password" required><br>';
+	str += '<input type="submit" class="submit" name="Login" value="Login" class="submit"> <br> <br></form></div>';
+	display.innerHTML = str;
 }
 function register()
 {

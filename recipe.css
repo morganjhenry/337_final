@@ -280,3 +280,8 @@ img
 	text-align: left;
 	width: 800px;
 }
+
+.error
+{
+	font-size: 20px;
+}

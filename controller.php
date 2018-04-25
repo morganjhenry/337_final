@@ -59,6 +59,8 @@ else if(isset($_POST['ID'])  && isset($_POST['password']))
     
     else 
     {
+        $_SESSION['goTo'] = 'login';
+        $_SESSION['error'] = "loginError";
         header('Location: home.php');
     }
 }
@@ -78,6 +80,13 @@ else if(isset($_POST['regID'])  && isset($_POST['regPassword']) && isset($_POST[
     $valid = $theDBA->register($userId, $password, $first, $last);
     if($valid === true)
     {
+        header('Location: home.php');
+    }
+    
+    else 
+    {
+        $_SESSION['goTo'] = 'register';
+        $_SESSION['error'] = "registerError";
         header('Location: home.php');
     }
     
