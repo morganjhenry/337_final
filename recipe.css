@@ -314,3 +314,15 @@ img
 {
 	width: 70px;
 }
+
+.regInputs
+{
+	float: right;
+	margin-right: 50px;
+	margin-left: 2px;
+}
+
+.reg
+{
+	text-align: right;
+}

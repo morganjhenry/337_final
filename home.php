@@ -88,10 +88,10 @@ function login()
 	   unset($_SESSION['error']);
 	}
 	?>
-	str+= '<form action="controller.php" method="POST">';
-	str += 'User ID: <input type="text" maxlength="13" size="13" name="ID" class="user" required>';
-	str += '<br>Password: <input  maxlength="13" size="13" type="password" name="password" " required><br>';
-	str += '<input type="submit" class="submit" name="Login" value="Login" class="submit"> <br> <br></form></div>';
+	str+= '<form action="controller.php" method="POST"><div class ="reg">';
+	str += 'User ID: <input type="text" maxlength="13" size="13" name="ID" class="regInputs" required>';
+	str += '<br>Password: <input  maxlength="13" size="13" type="password" name="password" class="regInputs" required><br>';
+	str += '</div><input type="submit" class="submit" name="Login" value="Login" class="submit"> <br> <br></form></div>';
 	display.innerHTML = str;
 }
 function register()
@@ -106,12 +106,12 @@ function register()
 	   unset($_SESSION['error']);
     }
 	?>
-	str += '<form action="controller.php" method="POST">';
-	str += 'First Name: <input type="text" maxlength="13" size="13" name="firstName" class="user" required><br>';
-	str += 'Last Name: <input type="text" maxlength="13" size="13" name="lastName" class="user" required> <br>';
-	str += 'User ID: <input type="text" maxlength="13" size="13" name="regID" class="user" pattern=".{4,}"title="User ID must be at least 4 characters" required> <br>';
-	str += 'Password: <input  maxlength="13" size="13" type="password" name="regPassword" pattern=".{6,}" title="Password must be at least 6 characters"required><br>';
-	str += '<input type="submit" class="submit" name="Register" value="Register" class="submit"> <br> <br></form></div>';
+	str += '<form action="controller.php" method="POST"><div class ="reg">';
+	str += 'First Name: <input type="text" maxlength="13" size="13" name="firstName" class="regInputs" required><br>';
+	str += 'Last Name: <input type="text" maxlength="13" size="13" name="lastName" class="regInputs" required> <br>';
+	str += 'User ID: <input type="text" maxlength="13" size="13" name="regID" class="regInputs" pattern=".{4,}"title="User ID must be at least 4 characters" required> <br>';
+	str += 'Password: <input  maxlength="13" size="13" type="password" name="regPassword" class="regInputs" pattern=".{6,}" title="Password must be at least 6 characters"required><br>';
+	str += '</div><input type="submit" class="submit" name="Register" value="Register" class="submit"> <br> <br></form></div>';
 	display.innerHTML = str;
 }
 function ingredients()
