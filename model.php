@@ -80,7 +80,7 @@ class DatabaseAdaptor {
 		$userID= $stmt->fetchAll ( PDO::FETCH_ASSOC );
 		$userID = $userID[0]['id'];
 		
-		$getList = "select ingredient.name, ingredient.cost, ingredient.unit, ingredient.notes  from ( " .
+		$getList = "select ingredient.name, ingredient.cost, shopping_list.qty, ingredient.unit, ingredient.notes  from ( " .
 				"(shopping_list join ingredient on (shopping_list.ing_id=ingredient.id)) " .
 				" join users on (shopping_list.user_id = users.id) " .
 				") where users.id=" . $userID;

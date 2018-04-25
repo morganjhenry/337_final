@@ -237,7 +237,7 @@ function shoppingList()
 function getShoppingList()
 {
 
-	var str= '<table class = "ingredientTable"><tr><th>Name</th><th>Cost</th><th>Unit</th><th>Description</th></tr>';
+	var str= '<table class = "ingredientTable"><tr><th>Name</th><th>Cost</th><th>Qty</th><th>Unit</th><th>Description</th></tr>';
 	var qdiv = document.getElementById("ShoppingListTable");
 	var ajax = new XMLHttpRequest();
 	ajax.open("GET","controller.php?call=getShoppingList", true); 
@@ -247,6 +247,7 @@ function getShoppingList()
 		if (ajax.readyState == 4 && ajax.status == 200) 
 		{
 			var arr = JSON.parse(ajax.responseText);
+			var total = 0;
 			console.log(arr.length);
 			for(i = 0; i < arr.length; i++)
 			{
@@ -263,9 +264,11 @@ function getShoppingList()
 				else
 					notes = arr[i]['notes'];
 					
-				str+= '<tr><td>' + arr[i]['name'] + '</td><td>$' + arr[i]['cost'] +'</td><td>'+ unit +'</td><td>'+notes+ '</td>';
+				str+= '<tr><td>' + arr[i]['name'] + '</td><td>$' + arr[i]['cost'] +'</td><td>'+ arr[i]['qty'] + '</td><td>' + unit +'</td><td>'+notes+ '</td>';
+				total += Number(arr[i]['cost']) * Number(arr[i]['qty']);
 			}
 			str += "</table>";
+			console.log(total);
 		 	qdiv.innerHTML = str;
 		}
 	} 
