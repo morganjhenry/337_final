@@ -315,9 +315,8 @@ function getShoppingList()
 				total += Number(arr[i]['cost']) * Number(arr[i]['qty']);
 			}
 			str += "</table><br><div>Total: $";
-			str += total;
+			str += total.toFixed(2);
 			str += "<br><button onclick='checkout()' class='checkout'>Checkout</button></div>";
-			console.log(total);
 		 	qdiv.innerHTML = str;
 		}
 	} 
