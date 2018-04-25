@@ -225,8 +225,7 @@ function shoppingList()
 
 	var display = document.getElementById("display");
 	var str = "";
-	str += '<div class="featured"></div><div class="recipe">Shopping List</div>';
-
+	str += '<div class="grocery"></div><div class="recipe">Shopping List';
 	
 	str += '<div id="ShoppingListTable"></div>';
 	display.innerHTML = str;
@@ -237,7 +236,7 @@ function shoppingList()
 function getShoppingList()
 {
 
-	var str= '<table class = "ingredientTable"><tr><th>Name</th><th>Cost</th><th>Qty</th><th>Unit</th><th>Description</th></tr>';
+	var str= '<table class = "shoppingTable"><tr><th>Name</th><th>Cost</th><th>Qty</th><th>Unit</th></tr>';
 	var qdiv = document.getElementById("ShoppingListTable");
 	var ajax = new XMLHttpRequest();
 	ajax.open("GET","controller.php?call=getShoppingList", true); 
@@ -258,16 +257,13 @@ function getShoppingList()
 					unit = "N/A";
 				else
 					unit = arr[i]['unit'];
-
-				if(arr[i]['notes'] == null)
-					notes = "N/A";
-				else
-					notes = arr[i]['notes'];
 					
-				str+= '<tr><td>' + arr[i]['name'] + '</td><td>$' + arr[i]['cost'] +'</td><td>'+ arr[i]['qty'] + '</td><td>' + unit +'</td><td>'+notes+ '</td>';
+				str+= '<tr><td>' + arr[i]['name'] + '</td><td>$' + arr[i]['cost'] +'</td><td>'+ arr[i]['qty'] + '</td><td>' + unit + '</td>';
 				total += Number(arr[i]['cost']) * Number(arr[i]['qty']);
 			}
-			str += "</table>";
+			str += "</table><br><div>Total: $";
+			str += total;
+			str += "<br><button onclick='checkout()' class='checkout'>Checkout</button></div>";
 			console.log(total);
 		 	qdiv.innerHTML = str;
 		}

@@ -241,3 +241,30 @@ li
 	margin-bottom: 70px;
 	margin-top: 0px;
 }
+
+.shoppingTable
+{
+	width: 750px;
+	margin-bottom: 0px;
+}
+
+.checkout
+{
+	margin-right: 370px;
+	margin-bottom: 80px;
+	magin-top: 30px;
+	float: right;
+}
+
+.grocery
+{
+	background: url("./images/grocery.jpg");
+	height: 388px;
+	width: 581px;
+	background-size: contain;
+	margin-top: 1px;
+	font-family: Courier;
+    font-size: 50px;
+    float: left;
+}
+
