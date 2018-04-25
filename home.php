@@ -70,7 +70,7 @@ function featured()
 	str+='<div class="featuredInfo"><ol>';
 	str+='<li>Make your favorite pankcake recipe</li>';
 	str+='<li>While the pancakes are still warm, stack them, putting a layer of peanut butter between each layer</li>';
-	str+='<li>In a saucepan, warm up your favorite jelly with some maple syrup, until disolved and mixed/li>';
+	str+='<li>In a saucepan, warm up your favorite jelly with some maple syrup, until disolved and mixed</li>';
 	str+='<li>Pour your jelly syrup on top of the stack of pancakes</li><br>';
 	str+='</ol><br></div></div></div></div>';
 	display.innerHTML = str;
@@ -90,7 +90,7 @@ function login()
 	?>
 	str+= '<form action="controller.php" method="POST">';
 	str += 'User ID: <input type="text" maxlength="13" size="13" name="ID" class="user" required>';
-	str += '<br>Password: <input  maxlength="13" size="13" type="password" name="password" required><br>';
+	str += '<br>Password: <input  maxlength="13" size="13" type="password" name="password" " required><br>';
 	str += '<input type="submit" class="submit" name="Login" value="Login" class="submit"> <br> <br></form></div>';
 	display.innerHTML = str;
 }
@@ -109,8 +109,8 @@ function register()
 	str += '<form action="controller.php" method="POST">';
 	str += 'First Name: <input type="text" maxlength="13" size="13" name="firstName" class="user" required><br>';
 	str += 'Last Name: <input type="text" maxlength="13" size="13" name="lastName" class="user" required> <br>';
-	str += 'User ID: <input type="text" maxlength="13" size="13" name="regID" class="user" required> <br>';
-	str += 'Password: <input  maxlength="13" size="13" type="password" name="regPassword" required><br>';
+	str += 'User ID: <input type="text" maxlength="13" size="13" name="regID" class="user" pattern=".{4,}"title="User ID must be at least 4 characters" required> <br>';
+	str += 'Password: <input  maxlength="13" size="13" type="password" name="regPassword" pattern=".{6,}" title="Password must be at least 6 characters"required><br>';
 	str += '<input type="submit" class="submit" name="Register" value="Register" class="submit"> <br> <br></form></div>';
 	display.innerHTML = str;
 }
