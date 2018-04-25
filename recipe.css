@@ -268,3 +268,15 @@ li
     float: left;
 }
 
+img
+{
+	margin-left: 60px;
+	margin-top: 30px;
+}
+
+.featuredInfo
+{
+	float: left;
+	text-align: left;
+	width: 800px;
+}

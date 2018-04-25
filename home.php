@@ -49,8 +49,21 @@ ingIDs = [];
 function featured()
 {
 	var display = document.getElementById("display");
-	display.innerHTML = '<div class="featured"></div><div class="recipe">Recipe of the Week</div>';
+	var str = '<div class="featured">';
+ 	str += '<img src="./images/pancakes.jpeg" height="350"></div>';
+ 	str += '<div class="recipe">Recipe of the Week:<br>PB&J Pancakes<br>';
+ 	str+='<div class="recipeInfo"><ul>';
+	str+='<li>Pancakes</li><br><li>Peanut Butter</li><br><li>Jelly</li><br>';
+	str+='</ul>';
+	str+='<div class="featuredInfo"><ol>';
+	str+='<li>Make your favorite pankcake recipe</li>';
+	str+='<li>While the pancakes are still warm, stack them, putting a layer of peanut butter between each layer</li>';
+	str+='<li>In a saucepan, warm up your favorite jelly with some maple syrup, until disolved and mixed/li>';
+	str+='<li>Pour your jelly syrup on top of the stack of pancakes</li><br>';
+	str+='</ol><br></div></div></div></div>';
+	display.innerHTML = str;
 }
+
 function login()
 {
 	var display = document.getElementById("display");
