@@ -279,6 +279,11 @@ function logout()
 {
 	document.location.href = "./controller.php";
 }
+
+function checkout()
+{
+	alert();
+}
 </script>
 
 </body>
