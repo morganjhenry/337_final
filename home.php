@@ -131,7 +131,7 @@ function ingredients()
 	<?php
 	if(isset($_SESSION['user']))
 	{
-	    echo "str += '<br><button onclick=\"addIngredients()\" class=\"addIng\">Add Ingredients to List</button></div>'";
+	    echo "str += '<br><button onclick=\"addIngredients()\" class=\"addIng\">Add Ingredients to Shopping List</button></div>'";
 	}
 	?>
 
@@ -141,7 +141,7 @@ function ingredients()
 
 function getIngredients()
 {
-	var str= '<table class = "ingredientTable"><tr><th>Name</th><th>Cost</th><th>Unit</th><th>Description</th><th>Add</th></tr>';
+	var str= '<table class = "ingredientTable"><tr><th class="nameCol">Name</th><th>Cost</th><th class="unitCol">Unit</th><th class="notes">Description</th><th>Add</th></tr>';
 	var qdiv = document.getElementById("IngTable");
 	var ajax = new XMLHttpRequest();
 	ajax.open("GET","controller.php?call=ingredients", true); 
@@ -214,7 +214,12 @@ function newIngredient()
 	var display = document.getElementById("display");
 	var str = "";
 	str += '<div class="ingredients"></div><div class="recipe">New Ingredient';
-	str +='<form action="controller.php" id="newIng" method="POST"><div class="newIng"> Name: <input type="text" maxlength="13" size="13" name="ingName" class="ingBox" required> <br>Cost: <input type="text" maxlength="13" size="13" name="ingCost" class="ingBox" required> <br>Unit: <input type="text" maxlength="13" size="13" name="ingUnit" class="ingBox" required> <br>Description: <textarea  form="newIng" rows="4" col="30" name="ingDescription" class="ingBox"required></textarea> <br><input type="submit" class="submit" name="Add Ingredient" value="Add Ingredient" class="submit"></div></form>';
+	str +='<form action="controller.php" id="newIng" method="POST"><div class="newIng">';
+	str += 'Name: <input type="text" maxlength="13" size="13" name="ingName" class="ingBox" required> <br>';
+	str += 'Cost: <input type="text" maxlength="13" size="13" name="ingCost" class="ingBox" required> <br>';
+	str += 'Unit: <input type="text" maxlength="13" size="13" name="ingUnit" class="ingBox" required> <br>';
+	str += '<div class="lineCols">Description: <br><textarea form="newIng" rows="4" cols="25" name="ingDescription" class="ingBox"required></textarea></div> <br>';
+	str += '<input type="submit" class="submit" name="Add Ingredient" value="Add Ingredient" class="submit"></div></form>';
 	str += '<button onclick="ingredients()">Back</button</div>';
 	display.innerHTML = str;
 }
