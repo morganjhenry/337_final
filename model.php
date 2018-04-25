@@ -66,8 +66,8 @@ class DatabaseAdaptor {
 	
 	public function addIng($name, $cost, $unit, $description)
 	{
-	    $stmt = $this->DB->prepare("insert into ingredient(name, cost, notes)" .
-	        "values ('" . $name . "' , '" . $cost . "','".$description."' )");
+	    $stmt = $this->DB->prepare("insert into ingredient(name, cost, unit, notes)" .
+	        "values ('" . $name . "' , '" . $cost . "','".$unit . "' , '" .$description."' )");
 	    $stmt->execute();
 	    return true;
 	}
