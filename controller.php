@@ -6,6 +6,7 @@ $call = "";
 if(isset($_GET['call']))
 {
     $call = $_GET['call'];
+    $call = htmlspecialchars($call);
 }
 
 //get ingredients
@@ -25,8 +26,11 @@ else if($call == 'getShoppingList')
 
 else if($call == 'addToShoppingList')
 {
-	$igID = json_decode($_GET['add_ig']);
-	$qty = json_decode($_GET['add_qty']	);
+    $add_ig = $_GET['add_ig']; 
+    $add_qty = $_GET['add_qty']; 
+    
+	$igID = json_decode($add_ig);
+	$qty = json_decode($add_qty);
 	$str = "";
 	
 	for($i = 0; $i < count($igID); $i++)
@@ -44,8 +48,8 @@ else if($call == 'recipes')
 //login
 else if(isset($_POST['ID'])  && isset($_POST['password']))
 {
-    $userId = $_POST['ID'];
-    $password = $_POST['password'];
+    $userId = htmlspecialchars($_POST['ID']);
+    $password = htmlspecialchars($_POST['password']);
     
     unset($_POST['ID']);
     unset($_POST['password']);
@@ -69,10 +73,10 @@ else if(isset($_POST['ID'])  && isset($_POST['password']))
 //register
 else if(isset($_POST['regID'])  && isset($_POST['regPassword']) && isset($_POST['firstName']) && isset($_POST['lastName']))
 {
-    $userId = $_POST['regID'];
-    $password = $_POST['regPassword'];
-    $first = $_POST['firstName'];
-    $last = $_POST['lastName'];
+    $userId = htmlspecialchars($_POST['regID']);
+    $password = htmlspecialchars($_POST['regPassword']);
+    $first = htmlspecialchars($_POST['firstName']);
+    $last = htmlspecialchars($_POST['lastName']);
     
     unset($_POST['regID']);
     unset($_POST['regPassword']);
@@ -99,10 +103,10 @@ else if(isset($_POST['regID'])  && isset($_POST['regPassword']) && isset($_POST[
 //add ingredient
 else if(isset($_POST['ingName'])  && isset($_POST['ingCost']) && isset($_POST['ingUnit']) && isset($_POST['ingDescription']))
 {
-    $name = $_POST['ingName'];
-    $cost = $_POST['ingCost'];
-    $unit = $_POST['ingUnit'];
-    $description = $_POST['ingDescription'];
+    $name = htmlspecialchars($_POST['ingName']);
+    $cost = htmlspecialchars($_POST['ingCost']);
+    $unit = htmlspecialchars($_POST['ingUnit']);
+    $description = htmlspecialchars($_POST['ingDescription']);
     
     unset($_POST['ingName']);
     unset($_POST['ingCost']);

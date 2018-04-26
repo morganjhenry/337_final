@@ -280,7 +280,6 @@ function getRecipes()
 }
 function shoppingList()
 {
-
 	var display = document.getElementById("display");
 	var str = "";
 	str += '<div class="grocery"></div><div class="recipe">Shopping List';
