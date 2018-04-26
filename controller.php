@@ -50,10 +50,11 @@ else if(isset($_POST['ID'])  && isset($_POST['password']))
     unset($_POST['ID']);
     unset($_POST['password']);
     
-    $valid = $theDBA->verifyCredentials($userId, $password);
-    if($valid === true)
+    $id = $theDBA->verifyCredentials($userId, $password);
+    
+    if($id != -1)
     {
-        $_SESSION['user'] = $userId;
+        $_SESSION['user'] = $id;
         header('Location: home.php');
     }
     
@@ -76,8 +77,11 @@ else if(isset($_POST['regID'])  && isset($_POST['regPassword']) && isset($_POST[
     unset($_POST['regID']);
     unset($_POST['regPassword']);
     unset($_POST['firstName']);
+    unset($_POST['lastName']);
     
-    $valid = $theDBA->register($userId, $password, $first, $last);
+    $hashed_pwd = password_hash($password, PASSWORD_DEFAULT);
+    
+    $valid = $theDBA->register($userId, $hashed_pwd, $first, $last);
     if($valid === true)
     {
         header('Location: home.php');

@@ -27,27 +27,38 @@ class DatabaseAdaptor {
 	
 	public function verifyCredentials ($un, $pw)
 	{
-		//$hashed_pwd = password_hash($pw, PASSWORD_DEFAULT);
-
-		$stmt = $this->DB->prepare("select pw_hash from users where username='" . $un . "'");
+		$stmt = $this->DB->prepare("select pw_hash from users where username=:un");
+		$stmt->bindParam ( 'un', $un );
 		$stmt->execute();
 		$hash = $stmt->fetchAll ( PDO::FETCH_ASSOC );
 		if($hash != NULL)
 		{
-
-			return password_verify($pw, $hash[0]['pw_hash']);
+			if(password_verify($pw, $hash[0]['pw_hash'])===true)
+			{
+			    $stmt = $this->DB->prepare("select id from users where username=:un");
+			    $stmt->bindParam ( 'un', $un );
+			    $stmt->execute();
+			    $hash = $stmt->fetchAll ( PDO::FETCH_ASSOC );
+			    return $hash[0]['id'];
+			    
+			}
+			
+			else
+			{
+			    return -1;
+			}
 		}
 		else 
 		{
-			return 0;
+			return -1;
 		}
 	}
 	
 	
-	public function register($un, $pw, $first, $last)
+	public function register($un, $hashed_pw, $first, $last)
 	{
-		$hashed_pwd = password_hash($pw, PASSWORD_DEFAULT);
-		$stmt = $this->DB->prepare("select * from users where username='" . $un . "'");
+		$stmt = $this->DB->prepare("select * from users where username=:un");
+		$stmt->bindParam('un', $un);
 		$stmt->execute();
 		$count = $stmt->fetchAll ( PDO::FETCH_ASSOC );
 		if($count != NULL)
@@ -56,8 +67,11 @@ class DatabaseAdaptor {
 		}
 		else 
 		{
-			$stmt = $this->DB->prepare("insert into users (username, pw_hash, f_name, l_name)" .
-			    "values ('" . $un . "' , '" . $hashed_pwd . "','".$first."','".$last."' )");
+			$stmt = $this->DB->prepare("insert into users (username, pw_hash, f_name, l_name) values (:un, :hashed_pw, :first, :last )");
+			$stmt->bindParam('un', $un);
+			$stmt->bindParam('hashed_pw', $hashed_pw);
+			$stmt->bindParam('first', $first);
+			$stmt->bindParam('last', $last);
 			$stmt->execute();
 			return true;
 		}
@@ -67,55 +81,52 @@ class DatabaseAdaptor {
 	public function addIng($name, $cost, $unit, $description)
 	{
 	    $stmt = $this->DB->prepare("insert into ingredient(name, cost, unit, notes)" .
-	        "values ('" . $name . "' , '" . $cost . "','".$unit . "' , '" .$description."' )");
+	        "values (:name, :cost, :unit, :description )");
+	    $stmt->bindParam('name', $name);
+	    $stmt->bindParam('cost', $cost);
+	    $stmt->bindParam('unit', $unit);
+	    $stmt->bindParam('description', $description);
 	    $stmt->execute();
 	    return true;
 	}
 	
-	public function getShoppingList($username)
-	{
-		$getUserID = "select id from users where username='" . $username . "'";
-		$stmt = $this->DB->prepare($getUserID);
+	public function getShoppingList($id)
+	{	
+		$stmt = $this->DB->prepare("select ingredient.name, ingredient.cost, shopping_list.qty, ingredient.unit, ingredient.notes  from ( " .
+		    "(shopping_list join ingredient on (shopping_list.ing_id=ingredient.id)) " .
+		    " join users on (shopping_list.user_id = users.id) " .
+		    ") where users.id=:id");
+		$stmt->bindParam('id', $id);
 		$stmt->execute();
-		$userID= $stmt->fetchAll ( PDO::FETCH_ASSOC );
-		$userID = $userID[0]['id'];
-		
-		$getList = "select ingredient.name, ingredient.cost, shopping_list.qty, ingredient.unit, ingredient.notes  from ( " .
-				"(shopping_list join ingredient on (shopping_list.ing_id=ingredient.id)) " .
-				" join users on (shopping_list.user_id = users.id) " .
-				") where users.id=" . $userID;
-		
-		$stmt = $this->DB->prepare($getList);
-		$stmt->execute ();
 		return $stmt->fetchAll ( PDO::FETCH_ASSOC );
 	}
 		
 	
-	public function addToShoppingList($igID, $qty, $username)
+	public function addToShoppingList($igID, $qty, $id)
 	{
-		$getUserID = "select id from users where username='" . $username . "'";
-		$stmt = $this->DB->prepare($getUserID);
-		$stmt->execute();
-		$userID= $stmt->fetchAll ( PDO::FETCH_ASSOC );
-		$userID = $userID[0]['id'];
-
-		$check = "select * from shopping_list where user_id='" . $userID . "' and ing_id='" . $igID . "'";
-		$stmt = $this->DB->prepare($check);
+		$stmt = $this->DB->prepare("select * from shopping_list where user_id=:id and ing_id=:igID");
+        $stmt->bindParam('id', $id);
+        $stmt->bindParam('igID', $igID);
 		$stmt->execute();
 		$record= $stmt->fetchAll ( PDO::FETCH_ASSOC );
 
 		if($record != null)
 		{
-			$updateQty = "update shopping_list set qty=qty+" . $qty . " where user_id=" . $userID . " and ing_id=" . $igID;
-			$stmt = $this->DB->prepare($updateQty);
+		    $stmt = $this->DB->prepare("update shopping_list set qty=qty+:qty where user_id=:id and ing_id=:igID");
+		    $stmt->bindParam('id', $id);
+		    $stmt->bindParam('igID', $igID);
+		    $stmt->bindParam('qty', $qty);
 			$stmt -> execute();
 			echo $updateQty;
 		}
 		else
 		{
 			$addToList = ("insert into shopping_list (user_id, ing_id, qty) "	 .
-						  "values ( " . $userID . " , " . $igID. " , " . $qty . ")");
+						  "values ( :id, :igID, :qty)");
 			$stmt = $this->DB->prepare($addToList);
+			$stmt->bindParam('id', $id);
+			$stmt->bindParam('igID', $igID);
+			$stmt->bindParam('qty', $qty);
 			$stmt->execute();	
 			echo $addToList;
 		}
@@ -147,4 +158,8 @@ foreach ($arr as $val)
 	echo $val['id'] . " " . $val['name'] . PHP_EOL;
 }
 */
+
+/*$theDBA = new DatabaseAdaptor();
+$arr = $theDBA->getShoppingList(4);
+print_r($arr);*/
 ?>
