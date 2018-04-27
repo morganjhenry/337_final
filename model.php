@@ -172,9 +172,9 @@ foreach ($arr as $val)
 	echo $val['id'] . " " . $val['name'] . PHP_EOL;
 }
 
-*/
+
 $theDBA = new DatabaseAdaptor();
 $arr = $theDBA->getAllRecipes();
-print_r($arr);
+print_r($arr);*/
 
 ?>
