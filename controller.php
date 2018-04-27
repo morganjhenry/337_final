@@ -42,7 +42,7 @@ else if($call == 'addToShoppingList')
 //get recipes
 else if($call == 'recipes')
 {
-    echo 'bye';
+    
 }
 
 //login

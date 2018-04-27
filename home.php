@@ -242,6 +242,7 @@ function recipes()
 	}
 	?>
 	display.innerHTML = str;
+	getRecipes();
 }
 function addRecipe()
 {
