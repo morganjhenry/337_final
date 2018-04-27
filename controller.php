@@ -17,6 +17,11 @@ if($call == 'ingredients')
 
 }
 
+else if($call == 'checkout')
+{
+    $theDBA->checkout($_SESSION['user']);
+}
+
 else if($call == 'getShoppingList')
 {
 	$arr = $theDBA -> getShoppingList($_SESSION['user']);
@@ -42,7 +47,8 @@ else if($call == 'addToShoppingList')
 //get recipes
 else if($call == 'recipes')
 {
-    
+    $arr = $theDBA->getAllRecipes();
+    echo json_encode($arr);
 }
 
 //login

@@ -339,7 +339,19 @@ function logout()
 
 function checkout()
 {
-	alert();
+	var ajax = new XMLHttpRequest();
+	ajax.open("GET","controller.php?call=checkout", true); 
+	ajax.send();
+	ajax.onreadystatechange = function() 
+	{
+		console.log("State: " + ajax.readyState);
+		if (ajax.readyState == 4 && ajax.status == 200) 
+		{
+		     
+		}
+	}
+
+	shoppingList();
 }
 </script>
 

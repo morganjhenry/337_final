@@ -100,6 +100,13 @@ class DatabaseAdaptor {
 		$stmt->execute();
 		return $stmt->fetchAll ( PDO::FETCH_ASSOC );
 	}
+	
+	public function getAllRecipes()
+	{
+	    $stmt = $this->DB->prepare("select rec_ing.rec_id, recipes.name as recipe, recipes.description, ingredient.name as ingredient, rec_ing.qty from ( (rec_ing join recipes on (rec_ing.rec_id = recipes.id)) join ingredient on (rec_ing.ing_id = ingredient.id) ) order by rec_ing.rec_id");
+	    $stmt->execute();
+	    return $stmt->fetchAll ( PDO::FETCH_ASSOC );
+	}
 		
 	
 	public function addToShoppingList($igID, $qty, $id)
@@ -131,6 +138,13 @@ class DatabaseAdaptor {
 			echo $addToList;
 		}
 	}
+	
+	public function checkout($id)
+	{
+	    $stmt = $this->DB->prepare("delete from shopping_list where user_id=:id");
+	    $stmt->bindParam('id', $id);
+	    $stmt -> execute();
+	}
 
 	
 } // End class DatabaseAdaptor
@@ -157,9 +171,10 @@ foreach ($arr as $val)
 {
 	echo $val['id'] . " " . $val['name'] . PHP_EOL;
 }
-*/
 
-/*$theDBA = new DatabaseAdaptor();
-$arr = $theDBA->getShoppingList(4);
-print_r($arr);*/
+*/
+$theDBA = new DatabaseAdaptor();
+$arr = $theDBA->getAllRecipes();
+print_r($arr);
+
 ?>
