@@ -213,6 +213,7 @@ li
 {
 	float: left;
 	width: 350px;
+	text-align: left;
 }
 
 .recipePic
@@ -302,17 +303,17 @@ img
 
 .notes
 {
-	width: 400px;
+	width: 350px;
 }
 
 .nameCol
 {
-	width: 100px;
+	width: 120px;
 }
 
 .unitCol
 {
-	width: 70px;
+	width: 90px;
 }
 
 .regInputs
@@ -332,7 +333,7 @@ img
 	border: solid;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	height: 400px;
+	min-height: 400px;
 	width: 800px;
 	float: right;
 	margin-right: 30px;

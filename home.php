@@ -278,7 +278,7 @@ function getRecipes()
 			 		curID = array[i]['rec_id'];
 				}
 				
-				str+='<li>'+array[i]['ingredient']+'</li><br><div class="indent">-'+array[i]['qty']+'</div><br>';
+				str+='<li>'+array[i]['ingredient']+'</li><div class="indent">-'+array[i]['qty']+'</div><br>';
 
 				if(i+1 == array.length || array[i+1]['rec_id']!=curID)
 				{
