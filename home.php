@@ -32,7 +32,7 @@ else
 }
 ?>
 
-<h1 class="header">EZ Menus</h1>
+<h1 class="header">Shopping List</h1>
 <div class="buttons">
 <button onclick="featured()">Home</button>
 <button onclick="ingredients()">Ingredients</button>
@@ -236,10 +236,10 @@ function recipes()
 	?>
 	str += '<div id="recipeList"></div>';
 	<?php
-    if(isset($_SESSION['user']))
+    /*if(isset($_SESSION['user']))
 	{
 	   echo "str += '<button onclick=\"addRecipeToList()\">Add to List</button</div>';";
-	}
+	}*/
 	?>
 	display.innerHTML = str;
 	getRecipes();
@@ -256,16 +256,7 @@ function addRecipe()
 function getRecipes()
 {
 	var recipeList = document.getElementById("recipeList");
-	var str = "";
-	str+='<div class="recipeTitle">PB&J Pancakes </div>';
-	str+='<img class="recipeImage"src="./images/pancakes.jpeg" alt="Recipe Pic" width="300">';
-	str+='<div class="recipeInfo"><ul>';
-	str+='<li>Pancakes</li><br><li>Peanut Butter</li><br><li>Jelly</li><br>';
-	str+='</ul><br>';
-	str+='<div class="recipeDes">This is how to make the pancakes but im not sure bc im not a chef also i hate jelly<br></div></div>';
-	
-	/*var ajax = new XMLHttpRequest();
-	var str = "";
+	var ajax = new XMLHttpRequest();
 	ajax.open("GET","controller.php?call=recipes", true); 
 	ajax.send();
 	ajax.onreadystatechange = function() 
@@ -274,11 +265,34 @@ function getRecipes()
 		if (ajax.readyState == 4 && ajax.status == 200) 
 		{
 			var array = JSON.parse(ajax.responseText);
-			printQuotes(array);
+			var str = "";
+			var curID = -1;
+			
+			for(var i=0; i<array.length; i++)
+			{
+				if(array[i]['rec_id'] != curID)
+				{
+					str += '<div class="aRecipe"><div class="recipeTitle">'+array[i]['recipe']+'</div>';
+					str += '<img class="recipeImage"src="./images/'+array[i]['pic_url']+'" alt="Recipe Pic" width="300">';
+			 		str+='<div class="recipeInfo"><ul>';
+			 		curID = array[i]['rec_id'];
+				}
+				
+				str+='<li>'+array[i]['ingredient']+'</li><br><div class="indent">-'+array[i]['qty']+'</div><br>';
+
+				if(i+1 == array.length || array[i+1]['rec_id']!=curID)
+				{
+					str+='</ul><br>';
+					str+='<div class="recipeDes">'+array[i]['description']+'</div></div></div><br>';
+				}
+			}
+			
+			recipeList.innerHTML = str;
 		}
-	}  */
-	recipeList.innerHTML = str;
+	}  
+
 }
+
 function shoppingList()
 {
 	var display = document.getElementById("display");

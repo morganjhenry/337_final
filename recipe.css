@@ -326,3 +326,20 @@ img
 {
 	text-align: right;
 }
+
+.aRecipe
+{
+	border: solid;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 400px;
+	width: 800px;
+	float: right;
+	margin-right: 30px;
+}
+
+.indent
+{
+	text-indent: 10px;
+	float: left;
+}

@@ -49,6 +49,7 @@ else if($call == 'recipes')
 {
     $arr = $theDBA->getAllRecipes();
     echo json_encode($arr);
+    
 }
 
 //login

@@ -103,7 +103,7 @@ class DatabaseAdaptor {
 	
 	public function getAllRecipes()
 	{
-	    $stmt = $this->DB->prepare("select rec_ing.rec_id, recipes.name as recipe, recipes.description, ingredient.name as ingredient, rec_ing.qty from ( (rec_ing join recipes on (rec_ing.rec_id = recipes.id)) join ingredient on (rec_ing.ing_id = ingredient.id) ) order by rec_ing.rec_id");
+	    $stmt = $this->DB->prepare("select rec_ing.rec_id, recipes.name as recipe, recipes.description, recipes.pic_url, ingredient.name as ingredient, rec_ing.qty from ( (rec_ing join recipes on (rec_ing.rec_id = recipes.id)) join ingredient on (rec_ing.ing_id = ingredient.id) ) order by rec_ing.rec_id");
 	    $stmt->execute();
 	    return $stmt->fetchAll ( PDO::FETCH_ASSOC );
 	}
@@ -171,7 +171,6 @@ foreach ($arr as $val)
 {
 	echo $val['id'] . " " . $val['name'] . PHP_EOL;
 }
-
 
 $theDBA = new DatabaseAdaptor();
 $arr = $theDBA->getAllRecipes();
